@@ -93,14 +93,14 @@ nav { border-top: 1px solid var(--border-color); display: flex; justify-content:
 <h2 style="margin-top: 15px;">КОТОБАНК</h2>
 <p style="color: #888;">Вход для персонала</p>
 </div>
-<input type="text" id="username" placeholder="Логин (admin)" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; outline: none;">
-<input type="password" id="password" placeholder="Пароль (1234)" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd; outline: none;">
+<input type="text" id="username" placeholder="Логин" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; outline: none;">
+<input type="password" id="password" placeholder="Пароль" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd; outline: none;">
 <button class="login-btn" onclick="handleLogin()">ВОЙТИ</button>
 </div>
 
 <div id="main-content">
 <header>
-<div><b>Сотрудник:</b> <span id="u-name">Admin</span></div>
+<div><b>Сотрудник:</b> <span id="u-name">Банка</span></div>
 <i class="fas fa-sign-out-alt" onclick="handleLogout()" style="color:#ccc; cursor:pointer;"></i>
 </header>
 
@@ -124,7 +124,7 @@ nav { border-top: 1px solid var(--border-color); display: flex; justify-content:
 <div style="padding: 20px;">
 <h4>Объявления</h4>
 <div style="background: #eef4ff; padding: 15px; border-radius: 12px; font-size: 0.85rem; color: #004a99; border-left: 4px solid var(--primary-blue);">
-Сегодня в 16:00 собрание по новым кредитным ставкам.
+Объявлений нет.
 </div>
 </div>
 
@@ -149,11 +149,13 @@ nav { border-top: 1px solid var(--border-color); display: flex; justify-content:
 <script>
 // --- НАСТРОЙКА КЛИЕНТОВ (ПРОСТО ДОБАВЛЯЙ СЮДА) ---
 const clientsDatabase = [
-{ name: "Иванов Иван Иванович", type: "VIP", phone: "+7 900 111-22-33" },
-{ name: "Петрова Мария Сергеевна", type: "Standard", phone: "+7 900 444-55-66" },
-{ name: "ООО 'ТехноМир'", type: "VIP", phone: "8 800 555-35-35" },
-{ name: "Сидоров Алексей", type: "Standard", phone: "+7 999 000-00-01" },
-{ name: "Кузнецова Анна", type: "Standard", phone: "+7 911 222-33-44" }
+{ name: "Роман Константинов", type: "Standard", phone: "+7 906 235 74 33" },
+{ name: "Артём", type: "Standard", phone: "+7 890 763 18 90" },
+{ name: "Святослав", type: "Standard", phone: "+375 529 888 00 88" },
+{ name: "Алексей", type: "Standard", phone: "+0" },
+{ name: "Матвей", type: "Standard", phone: "+7 901 736 24 15" },
+{ name: "Тимофей", type: "Standard", phone: "+7 902 871 61 09" },
+{ name: "Виталий", type: "Standard", phone: "+0" },
 ];
 
 // Функция отрисовки клиентов
