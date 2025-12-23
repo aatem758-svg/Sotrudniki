@@ -3,16 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>КотоБанк Сотрудники</title>
+
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="КотоПерсонал">
-
-<link rel="apple-touch-icon" href="logo.png">
-<link rel="icon" href="logo.png">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <style>
 :root {
 --primary-blue: #004a99;
@@ -20,39 +16,36 @@
 --text-dark: #212529;
 --border-color: #dee2e6;
 --success-green: #28a745;
---danger-red: #dc3545;
 }
 
-/* Чтобы приложение не скроллилось как сайт */
 body {
 font-family: 'Inter', sans-serif;
-background-color: #121212;
 margin: 0;
+background-color: #121212;
 display: flex;
 justify-content: center;
 height: 100vh;
 overflow: hidden;
--webkit-tap-highlight-color: transparent;
 }
 
 .mobile-viewport {
 width: 100%;
 max-width: 480px;
-background: #ffffff;
+background: white;
 position: relative;
 display: flex;
 flex-direction: column;
 }
 
-/* --- ЭКРАНЫ --- */
+/* Экраны */
 #login-screen, #main-content {
 width: 100%; height: 100%;
 position: absolute;
-transition: 0.5s ease-in-out;
+transition: 0.5s ease;
 }
 
 #login-screen { z-index: 100; background: white; padding: 40px; box-sizing: border-box; display: flex; flex-direction: column; }
-#main-content { display: none; flex-direction: column; background: white; }
+#main-content { display: none; flex-direction: column; }
 
 .modal {
 position: absolute;
@@ -67,40 +60,27 @@ overflow-y: auto;
 }
 .modal.active { top: 0; }
 
-/* --- КАРТЫ --- */
-.bank-card-item {
-background: linear-gradient(135deg, #1e293b, #0f172a);
-color: white;
-padding: 20px;
-border-radius: 15px;
-margin-bottom: 15px;
-box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-.btn-add-card {
-width: 100%;
-padding: 15px;
-border: 2px dashed var(--primary-blue);
-background: #eef4ff;
-color: var(--primary-blue);
-border-radius: 12px;
-font-weight: 700;
-cursor: pointer;
-margin-bottom: 20px;
-}
-
-/* --- UI ЭЛЕМЕНТЫ --- */
-.action-grid { padding: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.action-item { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 0.7rem; cursor: pointer; }
-.icon-box { width: 55px; height: 55px; background: #f0f4f8; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: var(--primary-blue); }
-
-.login-btn { background: var(--primary-blue); color: white; padding: 16px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top: 20px; }
-
 header { padding: 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-nav { border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; padding: 15px 0; background: white; margin-top: auto; }
+.action-grid { padding: 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.action-item { display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 0.75rem; cursor: pointer; color: var(--text-dark); text-decoration: none; }
+.icon-box { width: 60px; height: 60px; background: #f0f4f8; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--primary-blue); }
 
-.form-group { margin-bottom: 15px; display: flex; flex-direction: column; }
-.form-group input { padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+/* Клиенты */
+.client-card {
+padding: 15px;
+border: 1px solid var(--border-color);
+border-radius: 12px;
+margin-bottom: 10px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.client-status { font-size: 0.7rem; padding: 3px 8px; border-radius: 10px; font-weight: bold; }
+.status-vip { background: #fff3e0; color: #ff9800; }
+.status-stand { background: #e8f5e9; color: #4caf50; }
+
+.login-btn { background: var(--primary-blue); color: white; padding: 16px; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top: 20px; width: 100%; }
+nav { border-top: 1px solid var(--border-color); display: flex; justify-content: space-around; padding: 15px 0; background: white; margin-top: auto; }
 </style>
 </head>
 <body>
@@ -109,103 +89,104 @@ nav { border-top: 1px solid var(--border-color); display: flex; justify-content:
 
 <div id="login-screen">
 <div style="text-align: center; margin: 60px 0;">
-<i class="fas fa-shield-halved" style="font-size: 3.5rem; color: var(--primary-blue);"></i>
-<h2 style="margin-top: 15px;">BANK STAFF</h2>
-<p style="color: #888;">Корпоративный портал</p>
+<i class="fas fa-university" style="font-size: 3rem; color: var(--primary-blue);"></i>
+<h2 style="margin-top: 15px;">КОТОБАНК</h2>
+<p style="color: #888;">Вход для персонала</p>
 </div>
-<input type="text" id="username" placeholder="Логин (admin)" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px;">
-<input type="password" id="password" placeholder="Пароль (1234)" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd;">
-<button class="login-btn" onclick="handleLogin()">АВТОРИЗАЦИЯ</button>
+<input type="text" id="username" placeholder="Логин (admin)" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; outline: none;">
+<input type="password" id="password" placeholder="Пароль (1234)" style="padding: 15px; border-radius: 10px; border: 1px solid #ddd; outline: none;">
+<button class="login-btn" onclick="handleLogin()">ВОЙТИ</button>
 </div>
 
 <div id="main-content">
 <header>
-<div style="display:flex; align-items:center; gap:10px;">
-<div style="width:40px; height:40px; background:var(--primary-blue); color:white; border-radius:10px; display:flex; align-items:center; justify-content:center; font-weight:bold;">АД</div>
-<div><b>Администратор</b><br><small style="color:var(--success-green);">Защищено</small></div>
-</div>
-<i class="fas fa-power-off" onclick="handleLogout()" style="color:#ccc;"></i>
+<div><b>Сотрудник:</b> <span id="u-name">Admin</span></div>
+<i class="fas fa-sign-out-alt" onclick="handleLogout()" style="color:#ccc; cursor:pointer;"></i>
 </header>
 
 <div class="action-grid">
-<div class="action-item" onclick="openModal('m-cards')"><div class="icon-box"><i class="fas fa-credit-card"></i></div><span>Карты</span></div>
-<div class="action-item" onclick="alert('В разработке')"><div class="icon-box"><i class="fas fa-users"></i></div><span>Клиенты</span></div>
-<div class="action-item" onclick="alert('В разработке')"><div class="icon-box"><i class="fas fa-sack-dollar"></i></div><span>Кредиты</span></div>
+<a href="https://forms.gle/5Pai8ksHW7AiVPvk9" target="_blank" class="action-item">
+<div class="icon-box"><i class="fas fa-credit-card"></i></div>
+<span>Карты</span>
+</a>
+
+<div class="action-item" onclick="openModal('m-clients')">
+<div class="icon-box"><i class="fas fa-users"></i></div>
+<span>Клиенты</span>
 </div>
 
-<div style="padding: 0 20px;">
-<div style="background: #1e293b; color: white; padding: 20px; border-radius: 15px;">
-<small>Всего активных карт</small>
-<div style="font-size: 2rem; font-weight: 800;">1,284</div>
+<div class="action-item" onclick="alert('Раздел в разработке')">
+<div class="icon-box"><i class="fas fa-vault"></i></div>
+<span>Сейф</span>
+</div>
+</div>
+
+<div style="padding: 20px;">
+<h4>Объявления</h4>
+<div style="background: #eef4ff; padding: 15px; border-radius: 12px; font-size: 0.85rem; color: #004a99; border-left: 4px solid var(--primary-blue);">
+Сегодня в 16:00 собрание по новым кредитным ставкам.
 </div>
 </div>
 
 <nav>
 <i class="fas fa-home" style="color:var(--primary-blue);"></i>
-<i class="fas fa-chart-line"></i>
-<i class="fas fa-gear"></i>
+<i class="fas fa-bell"></i>
+<i class="fas fa-user-gear"></i>
 </nav>
 </div>
 
-<div id="m-cards" class="modal">
+<div id="m-clients" class="modal">
 <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
-<h3>Реестр карт</h3>
-<button onclick="closeModal('m-cards')" style="border:none; background:none; font-size:1.5rem;">×</button>
+<h3>База клиентов</h3>
+<button onclick="closeModal('m-clients')" style="border:none; background:none; font-size:1.5rem;">×</button>
 </div>
 
-<button class="btn-add-card" onclick="openModal('m-new-card')">+ ВЫДАТЬ НОВУЮ КАРТУ</button>
-
-<div id="cards-list">
-<div class="bank-card-item">
-<div style="display:flex; justify-content:space-between;"><span>МИР</span><i class="fas fa-wifi"></i></div>
-<div style="font-family:monospace; font-size:1.2rem; margin:15px 0;">**** **** **** 1122</div>
-<div style="font-size:0.8rem; opacity:0.7;">ARTEM</div>
-</div>
-</div>
-  <div id="cards-list">
-<div class="bank-card-item">
-<div style="display:flex; justify-content:space-between;"><span>МИР</span><i class="fas fa-wifi"></i></div>
-<div style="font-family:monospace; font-size:1.2rem; margin:15px 0;">**** **** **** 4234</div>
-<div style="font-size:0.8rem; opacity:0.7;">ARTEM2</div>
-</div>
-</div>
-  <div id="cards-list">
-<div class="bank-card-item">
-<div style="display:flex; justify-content:space-between;"><span>МИР Gold</span><i class="fas fa-wifi"></i></div>
-<div style="font-family:monospace; font-size:1.2rem; margin:15px 0;">**** **** **** 4321</div>
-<div style="font-size:0.8rem; opacity:0.7;"> </div>
-</div>
-</div>
-</div>
-
-<div id="m-new-card" class="modal">
-<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px;">
-<h3>Оформление карты</h3>
-<button onclick="closeModal('m-new-card')" style="border:none; background:none; font-size:1.5rem;">×</button>
-</div>
-<div class="form-group">
-<label>Имя и фамилия (LAT)</label>
-<input type="text" id="new-holder" placeholder="PETR PETROV">
-</div>
-<div class="form-group">
-<label>Тип карты</label>
-<select id="new-type" style="padding:12px; border-radius:8px; border:1px solid #ddd;">
-<option>МИР Classic</option>
-<option>VISA Gold</option>
-<option>Mastercard Black</option>
-</select>
-</div>
-<button class="login-btn" onclick="addNewCard()" style="width:100%;">ПОДТВЕРДИТЬ ВЫДАЧУ</button>
+<div id="clients-list"></div>
 </div>
 
 </div>
 
 <script>
+// --- НАСТРОЙКА КЛИЕНТОВ (ПРОСТО ДОБАВЛЯЙ СЮДА) ---
+const clientsDatabase = [
+{ name: "Иванов Иван Иванович", type: "VIP", phone: "+7 900 111-22-33" },
+{ name: "Петрова Мария Сергеевна", type: "Standard", phone: "+7 900 444-55-66" },
+{ name: "ООО 'ТехноМир'", type: "VIP", phone: "8 800 555-35-35" },
+{ name: "Сидоров Алексей", type: "Standard", phone: "+7 999 000-00-01" },
+{ name: "Кузнецова Анна", type: "Standard", phone: "+7 911 222-33-44" }
+];
+
+// Функция отрисовки клиентов
+function renderClients() {
+const list = document.getElementById('clients-list');
+list.innerHTML = ''; // Очищаем старое
+
+clientsDatabase.forEach(client => {
+const statusClass = client.type === "VIP" ? "status-vip" : "status-stand";
+const html = `
+<div class="client-card">
+<div>
+<div style="font-weight:600; font-size:0.9rem;">${client.name}</div>
+<div style="font-size:0.75rem; color:#888;">${client.phone}</div>
+</div>
+<span class="client-status ${statusClass}">${client.type}</span>
+</div>
+`;
+list.innerHTML += html;
+});
+}
+
+// Инициализация при загрузке
+renderClients();
+
+// Логика приложения
 function handleLogin() {
-if(document.getElementById('username').value === 'admin' && document.getElementById('password').value === '1234') {
+const u = document.getElementById('username').value;
+const p = document.getElementById('password').value;
+if(u === 'admin' && p === '1234') {
 document.getElementById('login-screen').style.transform = 'translateY(-100%)';
 document.getElementById('main-content').style.display = 'flex';
-} else { alert('Доступ запрещен'); }
+} else { alert('Ошибка доступа'); }
 }
 
 function handleLogout() {
@@ -215,23 +196,6 @@ setTimeout(() => { document.getElementById('main-content').style.display = 'none
 
 function openModal(id) { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-function addNewCard() {
-const holder = document.getElementById('new-holder').value;
-const type = document.getElementById('new-type').value;
-if(!holder) return alert('Введите имя');
-
-const cardHtml = `
-<div class="bank-card-item" style="background: linear-gradient(135deg, #064e3b, #022c22);">
-<div style="display:flex; justify-content:space-between;"><span>${type}</span><i class="fas fa-wifi"></i></div>
-<div style="font-family:monospace; font-size:1.2rem; margin:15px 0;">**** **** **** ${Math.floor(1000 + Math.random() * 9000)}</div>
-<div style="font-size:0.8rem; opacity:0.7;">${holder.toUpperCase()}</div>
-</div>
-`;
-document.getElementById('cards-list').insertAdjacentHTML('afterbegin', cardHtml);
-closeModal('m-new-card');
-alert('Карта успешно выпущена!');
-}
 </script>
 </body>
 </html>
